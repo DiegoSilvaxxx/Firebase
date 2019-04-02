@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Home</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <div *ngFor="let n of nomes">
+    {{n.nome}}
+  </div>
+
+  <button ion-button color="dark" (click)="olaMundo()">Dark Outline</button>
+  <button ion-button color="danger" (click)="irParaTeste()">Teste</button>
+
+
+</ion-content>
