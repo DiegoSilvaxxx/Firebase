@@ -1,20 +1,27 @@
 <ion-header>
   <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>Home</ion-title>
+    
+    <ion-title>Login</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
 
-  <div *ngFor="let n of nomes">
-    {{n.nome}}
-  </div>
+  <ion-list>
 
-  <button ion-button color="dark" (click)="olaMundo()">Dark Outline</button>
-  <button ion-button color="danger" (click)="irParaTeste()">Teste</button>
+    <ion-item>
+      <ion-label fixed>E-mail</ion-label>
+      <ion-input type="text" value="" #email></ion-input>
+    </ion-item>
+  
+    <ion-item>
+      <ion-label fixed>Senha</ion-label>
+      <ion-input type="password" #senha></ion-input>
+    </ion-item>
+  
+  </ion-list>
 
+  <button ion-button full (click)="login()">Entrar</button>
 
+  <button ion-button full (click)="cadastrar()">Novo Usuário</button>
 </ion-content>

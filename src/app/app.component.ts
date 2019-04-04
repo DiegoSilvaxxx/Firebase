@@ -4,25 +4,33 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
+import { AngularFireAuth } from '@angular/fire/auth';
+
+
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
+  [x: string]: any;
   @ViewChild(Nav) nav: Nav;
 
   rootPage: string = 'HomePage'; // <--
 
-  pages: Array<{title: string, component: string}>;// <--
+  pages: Array<{ title: string, component: string }>;// <--
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public platform: Platform,
+    public statusBar: StatusBar,
+    public splashScreen: SplashScreen,
+    public firebaseauth: AngularFireAuth) {
+
     this.initializeApp();
 
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Home', component: 'HomePage' },// <--
-     
+      { title: 'Logoff', component: 'LogoffPage' },
+
     ];
 
   }
@@ -34,6 +42,21 @@ export class MyApp {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
+    this.firebaseauth.authState
+      .subscribe(
+        user => {
+          if (user) {
+            this.rootPage = 'InicioPage'; //pagina inicial (logado)
+          } else {
+            this.rootPage = 'HomePage'; //se não houver usuario
+          }
+        },
+        () => {
+          this.rootPage = 'InicioPage';//pagina inicial (logado)
+        }
+      );
+
+
   }
 
   openPage(page) {
