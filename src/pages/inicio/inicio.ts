@@ -1,12 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
+import { Cliente } from '../../model/cliente';
+import firebase from 'firebase';
 
-/**
- * Generated class for the InicioPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+
 
 @IonicPage()
 @Component({
@@ -15,11 +12,33 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class InicioPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  listaDeClientes : Cliente[] = [];
+  firestore = firebase.firestore();
+  settings = {timestampsInSnapshots: true};
+
+  constructor(public navCtrl: NavController, 
+    public navParams: NavParams,
+    public menu : MenuController,) 
+    
+    {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad InicioPage');
+    this.menu.enable(true);
+    this.getList();
   }
+getList(){
+  var ref = this.firestore.collection("cliente");
+  
+  ref.get().then(query=> {
+    query.forEach(doc =>{
+      let c = new Cliente();
+      c.setDados(doc.data());
+      this.listaDeClientes.push(c);
+    });
+   
+  });
+ 
+}
 
 }

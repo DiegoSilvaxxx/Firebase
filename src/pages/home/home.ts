@@ -18,6 +18,9 @@ export class HomePage {
     public toastCtrl: ToastController) {
 
   }
+  ionViewDidload(){
+    this.menu.enable(false);
+  }
 
   login() {
     this.fireauth.auth.signInWithEmailAndPassword(this.email.value, this.senha.value)

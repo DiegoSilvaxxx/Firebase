@@ -9,6 +9,9 @@ import { AngularFireAuth } from 'angularfire2/auth';
 
 import { AngularFireModule } from '@angular/fire';
 import { firebaseConfig } from '../config/firebase.config';
+import {AngularFirestoreModule} from 'angularFire2/firestore';
+import {AngularFireStorageModule} from 'angularfire2/storage';
+import { ClienteService } from '../service/cliente.service';
 
 
 
@@ -22,7 +25,11 @@ import { firebaseConfig } from '../config/firebase.config';
     IonicModule.forRoot(MyApp),
     HttpClientModule,
     //configuração do servidor(firebase.config.ts)
-    AngularFireModule.initializeApp(firebaseConfig)
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFirestoreModule,
+    AngularFireStorageModule,
+
+
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -34,6 +41,7 @@ import { firebaseConfig } from '../config/firebase.config';
     StatusBar,
     SplashScreen,
     AngularFireAuth,//Serviço de autenticação(Authentication)
+    ClienteService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
