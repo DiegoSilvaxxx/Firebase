@@ -12,7 +12,9 @@
 
 
 <ion-content padding>
-    <ion-card *ngFor="let cliente of listaDeClientes">
+  <button ion-button full (click)="novoCliente()">Novo cliente</button>
+   
+  <ion-card *ngFor="let cliente of listaDeClientes">
 
         <ion-card-header>
           {{cliente?.nome}}
@@ -21,6 +23,9 @@
         <ion-card-content>
         <ion-icon name="mail"></ion-icon> {{cliente?.email}} 
         <ion-icon name="call"></ion-icon> {{cliente?.telefone}}
+
+        <button (click)="remove(cliente)">REMOVER</button>
+        <button (click)="atualiza(cliente)">ATUALIZAR</button>
         </ion-card-content>
       
       </ion-card>
