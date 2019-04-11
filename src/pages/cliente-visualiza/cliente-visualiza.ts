@@ -13,11 +13,13 @@ import { Cliente } from '../../model/cliente';
 })
 export class ClienteVisualizaPage {
 
+  
   formGroup: FormGroup;
 
   firestore = firebase.firestore();
   settings = { timestampsInSnapshots: true };
   cliente = new Cliente;
+  imagem : string = "";
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -34,11 +36,15 @@ export class ClienteVisualizaPage {
     })
 
   }
+  ionViewDidLoad(){
+    this.downloadFoto();
+  }
   atualizar() {
     let ref = this.firestore.collection('cliente')
     ref.doc(this.cliente.id).set(this.formGroup.value)
       .then(() => {
         console.log('Atualizado com sucesso');
+        
         this.navCtrl.push('InicioPage')
 
       }).catch(() => {
@@ -46,6 +52,24 @@ export class ClienteVisualizaPage {
 
       })
 
+  }
+  enviarArquivo(event){
+    let imagem = event.srcElement.files[0]
+    //console.log(imagem.name);
+    let ref = firebase.storage().ref().child(`clientes/${this.cliente.id}.jpg`);
+    ref.put(imagem).then(url=>{
+      console.log("Enviado com sucesso!");
+      this.downloadFoto();
+    })
+
+  }
+
+  downloadFoto(){
+    let ref = firebase.storage().ref()
+    .child(`cliente/${this.cliente.id}.jpg`);
+    ref.getDownloadURL().then( url=>{
+      this.imagem = url;
+    })
   }
 
 }

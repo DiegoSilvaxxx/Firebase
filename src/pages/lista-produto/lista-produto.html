@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-navbar>
+    
+    <ion-title>Login</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-list>
+
+    <ion-item>
+      <ion-label fixed>E-mail</ion-label>
+      <ion-input type="text" value="" #email></ion-input>
+    </ion-item>
+  
+    <ion-item>
+      <ion-label fixed>Senha</ion-label>
+      <ion-input type="password" #senha></ion-input>
+    </ion-item>
+  
+  </ion-list>
+
+  <button ion-button full (click)="login()">Entrar</button>
+
+  <button ion-button full (click)="cadastrar()">Novo Usuário</button>
+</ion-content>

@@ -30,6 +30,7 @@ export class MyApp {
     this.pages = [
       { title: 'Home', component: 'HomePage' },// <--
       { title: 'Logoff', component: 'LogoffPage' },
+      { title: 'lista de Produto', component: 'InicioProdutoPage' },
 
     ];
 

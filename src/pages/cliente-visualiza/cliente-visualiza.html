@@ -1,13 +1,17 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>NovoCliente</ion-title>
+    <ion-title>Atualiza cliente</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+ <img src="{{imagem}}">
+  <ion-item>
+    <input type="file" (change)="enviaArquivo($event)"/>
+  </ion-item>
 
   <form [formGroup]="formGroup" (ngSubmit)="atualizar()">
     <ion-list>
